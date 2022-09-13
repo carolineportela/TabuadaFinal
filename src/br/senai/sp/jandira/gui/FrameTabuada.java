@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 //import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -38,16 +39,16 @@ public class FrameTabuada {
 	
 	
 	
-	// configuração de tela
-	
-	public void criarTela() {
+	    // configurando a tela
+	   public void criarTela() {
 		JFrame tela = new JFrame();
 		tela.setTitle(titulo);
 		tela.setSize(largura, altura);
 		tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		tela.setLayout(null);
+		tela.setLocationRelativeTo(null);
 		
-	// componentes de tela
+	   // componentes de tela
 		
 		Container painel = tela.getContentPane();
 				
@@ -58,14 +59,18 @@ public class FrameTabuada {
 		labelTabuada.setForeground(corDoTitulo);
 		labelTabuada.setFont(fonteTabuada);
 		
-		//icone
+		//icone	
+		ImageIcon logo = new ImageIcon ("src/icone/calculadora.png");
+		JLabel labelIcone = new JLabel (logo);
+		labelIcone.setIcon(logo);
+		labelIcone.setBounds(5, 0, 100, 100);
 		
-		//ImageIcon icon = new ImageIcon("C:/Users/22282222/eclipse-workspace/tabuada/tabuada/src/br/senai/sp/jandira/model/contabilidade64.png");
-		//JLabel icone = new JLabel(icon);
-		//icone.setBounds(20,20,80,80);
 		
-		//subtitulo
 		
+		
+		
+		
+		//subtitulo	
 		JTextArea labelSubtitulo= new JTextArea();
 		Font labelTexto = new Font("SansSerif", Font.ROMAN_BASELINE, 12);
 		labelSubtitulo.setText("Com a tabuada 1.0 os seus problemas acabaram. Calcule a"
@@ -89,8 +94,8 @@ public class FrameTabuada {
 		textFieldMultiplicando.setBounds(250, 120, 200, 35);
 		textFieldMultiplicando.setBorder(BorderFactory.createLineBorder(Color.black));
 		textFieldMultiplicando.setHorizontalAlignment(JTextField.RIGHT);
-		//mostrar minimo multiplicador
 		
+		//mostrar o minimo multiplicador	
 		JLabel labelMinimo = new  JLabel();
 		Font minimiF = new Font("SansSerif", Font.PLAIN, 14);
 		labelMinimo.setText("Minímo Multiplicador:");
@@ -98,14 +103,13 @@ public class FrameTabuada {
 		labelMinimo.setBounds(30, 160, 200, 35);
 		labelMinimo.setFont(minimiF);
 		
-	
 		JTextField textFieldMinimo = new JTextField();
 		textFieldMinimo.setBounds(250, 160, 200, 35);
 		textFieldMinimo.setBorder(BorderFactory.createLineBorder(Color.black));
 		textFieldMinimo.setHorizontalAlignment(JTextField.RIGHT);
 		
 		
-		//mostrar maximo multiplicador
+		//mostrar o maximo multiplicador
 		JLabel labelMaximo = new JLabel();
 		Font maxF = new Font("SansSerif",Font.PLAIN	, 14);
 		labelMaximo.setText("Maxímo Multiplicador:");
@@ -143,7 +147,7 @@ public class FrameTabuada {
 		labelResult.setForeground(Color.black);
 		labelResult.setFont(new Font("Arial", Font.BOLD, 13));
 		
-		
+		//barra de rolagem
 		JScrollPane scroll = new JScrollPane();
 		scroll.setBounds(60, 390, 400, 220);
 		JList<String> listLista = new JList<>();
@@ -164,7 +168,11 @@ public class FrameTabuada {
 		painel.add(labelResult);
 		painel.add(listLista);
 		painel.add(scroll);
-		//painel.add(icone);
+		
+		
+		painel.add(labelIcone);
+		
+		
 		
 		
 	
@@ -176,16 +184,16 @@ public class FrameTabuada {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if (textFieldMultiplicando.getText().isEmpty()) {
-						JOptionPane.showMessageDialog(null, "O multiplicando é obrigatório!");
+						JOptionPane.showMessageDialog(tela, "O multiplicando é obrigatório!");
 						textFieldMultiplicando.requestFocus();
 					} else if (textFieldMinimo.getText().isEmpty()) {
-						JOptionPane.showMessageDialog(null, "O mínimo multiplicador é obrigatório!");
+						JOptionPane.showMessageDialog(tela, "O mínimo multiplicador é obrigatório!");
 						textFieldMinimo.requestFocus();
 					} else if (textFieldMax.getText().isEmpty()) {
-						JOptionPane.showMessageDialog(null, "O máximo multiplicador é obrigatório!");
+						JOptionPane.showMessageDialog(tela, "O máximo multiplicador é obrigatório!");
 						textFieldMax.requestFocus();
 					} else if(Integer.parseInt(textFieldMultiplicando.getText()) > 1000 || Integer.parseInt(textFieldMinimo.getText()) > 1000 || Integer.parseInt(textFieldMax.getText()) > 1000) {
-						JOptionPane.showMessageDialog(null, "Os valores devem ser menor ou igual a 1000!", "ERRO", JOptionPane.OK_OPTION);
+						JOptionPane.showMessageDialog(tela, "Os valores devem ser menor ou igual a 1000!", "ERRO", JOptionPane.OK_OPTION);
 					} else {
 						
 						Tabuada tabuada = new Tabuada();
